@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Input Lag Demo</title>
+    <script>
+
+    </script>
+</head>
+<body>
+<textarea id="textArea" rows="10" cols="100"></textarea>
+<div>
+    <label for="delaySlider">Delay: <span id="delayLabel">220</span>ms</label>
+    <input type="range" id="delaySlider" min="0" max="1000" step="10" value="220">
+</div>
+<script>
+    const textArea = document.getElementById("textArea");
+    const delaySlider = document.getElementById('delaySlider');
+    const delayLabel = document.getElementById('delayLabel');
+
+    let delay = parseInt(delaySlider.value);
+
+    function delayInput(event) {
+        event.preventDefault();
+        const char = event.key;
+
+        setTimeout(() => {
+            const currentValue = textArea.value;
+            textArea.value = currentValue + char;
+        }, delay);
+    }
+
+    textArea.addEventListener('keypress', delayInput);
+
+    delaySlider.addEventListener('input', (event) => {
+        delay = parseInt(event.target.value);
+        delayLabel.textContent = delay;
+    });
+</script>
+</body>
+</html>
