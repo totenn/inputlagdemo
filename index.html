@@ -26,7 +26,11 @@
 
         setTimeout(() => {
             const currentValue = textArea.value;
-            textArea.value = currentValue + char;
+            if (event.key === 'Enter') {
+                textArea.value = currentValue + '\n';
+            } else {
+                textArea.value = currentValue + char;
+            }
         }, delay);
     }
 
