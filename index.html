@@ -26,11 +26,14 @@
 
         setTimeout(() => {
             const currentValue = textArea.value;
+            const startPosition = textArea.selectionStart;
+            const endPosition = textArea.selectionEnd;
             if (event.key === 'Enter') {
-                textArea.value = currentValue + '\n';
+                textArea.value = textArea.value.substring(0, startPosition) + '\n' + textArea.value.substring(endPosition);
             } else {
-                textArea.value = currentValue + char;
+                textArea.value = textArea.value.substring(0, startPosition) + char + textArea.value.substring(endPosition);
             }
+            textArea.selectionStart = textArea.selectionEnd = startPosition + 1;
         }, delay);
     }
 
